@@ -74,3 +74,19 @@ export const createImage = ({ title, image, auth }) => {
     } 
   })
 }
+
+
+export const createPost = ({ title, image, auth }) => {
+  return axios({
+    method: 'POST',
+    url: `${baseUrl}/posts/create/`,
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`,
+      'Content-Type': 'multipart/form-data'
+    },
+    data: {
+      image, 
+      title,
+    } 
+  })
+}

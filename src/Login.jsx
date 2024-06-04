@@ -1,14 +1,22 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 
 import { AuthContext } from "./context"
 import { getToken } from "./api"
 import CreateNewUser from "./CreateNewUser"
+import { useNavigate } from "react-router-dom"
 
 
 function Login() {
   const { auth } = useContext(AuthContext)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+
+  useEffect(()=> {
+    if (auth.accessToken){
+      navigate('/')
+    }
+  },[navigate, auth.accessToken])
 
   const submit = () => {
     getToken({ auth, username, password })
