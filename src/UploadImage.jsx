@@ -8,22 +8,23 @@ const UploadImage = () => {
     const [title, setTitle] = useState('');
 
     const submit = () => {
+        console.log('Auth in upload ', auth)
         createImage({
             auth,
             title,
             image
         })
-        .then(response => {
-            console.log('Upload image response', response);
-        })
-        .catch(error => console.log('create image error', error));
+            .then(response => {
+                console.log('Upload image response', response);
+            })
+            .catch(error => console.log('create image error', error));
     };
 
     return (
         <div>
             <h1>Upload Image</h1>
             <div>Image Title</div>
-            <input 
+            <input
                 onChange={e => setTitle(e.target.value)}
                 value={title}
             />

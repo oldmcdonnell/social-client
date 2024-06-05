@@ -11,7 +11,7 @@ const CreatePost = () => {
 
     useEffect(() => {
         if (auth.accessToken) {
-          getImages({ auth })
+            getImages({ auth })
             .then(response => {
                 console.log('checking accesstoken  ', auth.accessToken)
                 console.log('GET IMAGES: RESPONSE: ', response)
@@ -22,6 +22,7 @@ const CreatePost = () => {
       }, [auth.accessToken])
 
     const submit = () => {
+        console.log('console log at submit  ',auth, title, text, image)
         createPost({
             auth,
             title,

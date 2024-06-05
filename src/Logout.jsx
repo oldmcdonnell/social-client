@@ -4,11 +4,10 @@ import { useNavigate } from "react-router-dom"
 
 function Logout() {
     const { auth } = useContext(AuthContext)
-    const token = localStorage.getItem("token")
     const navigate = useNavigate()
 
     useEffect(()=> {
-        if (auth.accessToken = undefined){
+        if (auth.accessToken == undefined){
           navigate('/login/')
         }
       },[navigate, auth.accessToken])
@@ -25,7 +24,7 @@ function Logout() {
         <>
         <div>
             <button
-            onClick={logoutUser}
+            onClick={() => logoutUser()}
             >
             Logout
             </button>

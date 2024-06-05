@@ -3,16 +3,17 @@ import axios from 'axios'
 const baseUrl = "http://127.0.0.1:8000"
 
 
-const checkAuth = ({ auth }) =>{
-  if (auth.accessToken == undefined){
-    let tempToken = JSON.parse(localStorage.getItem('token'))
-    auth.setAccessToken(tempToken)
-    console.log('TempToken function ', tempToken)
-  }
-  else {
-    console.log('auth exists', auth.accessToken)
-  }
-}
+// const checkAuth = ({ auth }) =>{
+//   if (auth.accessToken == undefined){
+//     let tempToken = JSON.parse(localStorage.getItem('token'))
+//     auth.setAccessToken(tempToken)
+//     console.log('TempToken function ', tempToken)
+
+//   }
+//   else {
+//     console.log('auth exists', auth.accessToken)
+//   }
+// }
 
 
 export const getToken = ({ auth, username, password }) => {
@@ -64,6 +65,19 @@ export const createUser = ({ username, password, firstName, lastName }) => {
 }
 
 export const getImages = ({ auth }) => {
+  console.log('GET IMAGES: AUTH: ', auth.accessToken)
+  return axios({
+    method: 'GET',
+    url: `${baseUrl}/get-images/`,
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`
+    }
+  })
+}
+
+
+export const dropdownImages = ({ auth }) => {
+  console.log('GET IMAGES: AUTH: ', auth.accessToken)
   return axios({
     method: 'GET',
     url: `${baseUrl}/get-images/`,
@@ -74,7 +88,8 @@ export const getImages = ({ auth }) => {
 }
 
 export const createImage = ({ title, image, auth }) => {
-  checkAuth({ auth })
+  console.log('CREATE IMAGE: AUTH: ', auth.accessToken)
+  // checkAuth({ auth })
   return axios({
     method: 'POST',
     url: `${baseUrl}/create-image/`,
@@ -90,8 +105,8 @@ export const createImage = ({ title, image, auth }) => {
 }
 
 
-export const createPost = ({ title, image, auth }) => {
-  checkAuth({ auth })
+export const createPost = ({ title, image, auth, text }) => {
+  // checkAuth({ auth })
   console.log("Checking auth and other stuff", auth)
   return axios({
     method: 'POST',
@@ -103,6 +118,7 @@ export const createPost = ({ title, image, auth }) => {
     data: {
       image, 
       title,
+      text,
     } 
   })
 }
