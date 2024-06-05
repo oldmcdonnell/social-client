@@ -2,6 +2,17 @@ import axios from 'axios'
 
 const baseUrl = "http://127.0.0.1:8000"
 
+
+const checkAuth = ({ auth }) =>{
+  if (auth.accessToken = undefined){
+    let tempToken = JSON.parse(localStorage.getItem('token'))
+    auth.setAccessToken(tempToken)
+  }
+  else {
+    console.log('auth exists')
+  }
+
+}
 export const getToken = ({ auth, username, password }) => {
   axios.post(`${baseUrl}/token/`, {
     username: username,
@@ -52,6 +63,7 @@ export const createUser = ({ username, password, firstName, lastName }) => {
 }
 
 export const getImages = ({ auth }) => {
+  checkAuth({ auth })
   return axios({
     method: 'GET',
     url: `${baseUrl}/get-images/`,
@@ -62,6 +74,7 @@ export const getImages = ({ auth }) => {
 }
 
 export const createImage = ({ title, image, auth }) => {
+  checkAuth({ auth })
   return axios({
     method: 'POST',
     url: `${baseUrl}/create-image/`,
@@ -78,6 +91,8 @@ export const createImage = ({ title, image, auth }) => {
 
 
 export const createPost = ({ title, image, auth }) => {
+  checkAuth({ auth })
+  console.log("Checking auth and other stuff", auth)
   return axios({
     method: 'POST',
     url: `${baseUrl}/posts/create/`,
