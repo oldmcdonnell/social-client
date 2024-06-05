@@ -63,7 +63,7 @@ const AuthProvider = ({ children }) => {
     if (accessToken) {
       localStorage.setItem("token", JSON.stringify(accessToken));
     } else {
-      localStorage.removeItem("token");
+      localStorage.getItem("token");
     }
   }, [accessToken]);
 

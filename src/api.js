@@ -60,13 +60,13 @@ export const getImages = ({ auth }) => {
   })
 }
 
-export const createImage = async ({ title, image }) => {
+export const createImage = async ({ auth, title, image }) => {
   const { accessToken } = useContext(AuthContext);
   return axios({
     method: 'POST',
     url: `${baseUrl}/create-image/`,
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${auth.accessToken}`,
       'Content-Type': 'multipart/form-data',
     },
     data: {
@@ -78,16 +78,15 @@ export const createImage = async ({ title, image }) => {
 
 
 
-export const createPost = async ({ title, image, text }) => {
-  const { accessToken } = useContext(AuthContext);
-  console.log('CREATE POST: ', title, image, accessToken, text);
-  console.log('CREATE POST: AUTH TOKEN: ', accessToken);
+export const createPost = async ({ auth, title, image, text }) => {
+  console.log('CREATE POST: ', title, image, auth.accessToken, text);
+  console.log('CREATE POST: AUTH TOKEN: ', auth.accessToken);
 
   return axios({
     method: 'POST',
     url: `${baseUrl}/posts-create/`,
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${auth.accessToken}`,
       'Content-Type': 'multipart/form-data',
     },
     data: {
