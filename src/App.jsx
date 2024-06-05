@@ -1,6 +1,7 @@
 import Images from "./Images"
 import UploadImage from "./UploadImage"
 import CreatePost from "./CreatePost.jsx"
+import Logout from "./Logout.jsx"
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
     <UploadImage />
     <Images />
     <CreatePost />
+    <Logout />
     </div>
   )
 }

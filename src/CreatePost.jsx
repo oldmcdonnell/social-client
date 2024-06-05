@@ -1,31 +1,32 @@
 import React, { useState, useEffect, useContext} from "react";
-import { getImages, createPost } from "./api"; // Ensure you have createPost in your API file
+import { getImages, createPost } from "./api"; 
 import { AuthContext } from "./context";
 
 const CreatePost = () => {
     const { auth } = useContext(AuthContext);
     const [text, setText] = useState("");
     const [title, setTitle] = useState("");
-    const [image, setImage] = useState(undefined); // Handle image as an ID
-    const [images, setImages] = useState([]); // State to hold user-uploaded images
+    const [image, setImage] = useState("");
+    const [images, setImages] = useState([]); 
 
     useEffect(() => {
-        // Fetch user-uploaded images on component mount
-        fetchImages();
-    }, []);
-
-    const fetchImages = () => {
-        getImages()
-            .then(response => setImages(response.data))
-            .catch(error => console.log('Error fetching images', error));
-    };
+        if (auth.accessToken) {
+          getImages({ auth })
+            .then(response => {
+                console.log('checking accesstoken  ', accessToken)
+                console.log('GET IMAGES: RESPONSE: ', response)
+                setImages(response.data)
+            })
+            .catch(error => console.log('ERROR: ', error))
+        }
+      }, [auth.accessToken])
 
     const submit = () => {
         createPost({
             auth,
             title,
             text,
-            attached_image: image 
+            image
         })
         .then(response => {
             console.log('Create post response', response);
