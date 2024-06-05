@@ -60,33 +60,56 @@ export const getImages = ({ auth }) => {
   })
 }
 
-export const createImage = ({ title, image, auth }) => {
+export const createImage = async ({ title, image }) => {
+  const { accessToken } = useContext(AuthContext);
   return axios({
     method: 'POST',
     url: `${baseUrl}/create-image/`,
     headers: {
-      Authorization: `Bearer ${auth.accessToken}`,
-      'Content-Type': 'multipart/form-data'
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'multipart/form-data',
     },
     data: {
-      image, 
+      image,
       title,
-    } 
-  })
-}
+    },
+  });
+};
 
 
-export const createPost = ({ title, image, auth }) => {
+// Function to create a post
+export const createPost = async ({ title, image, text }) => {
+  const { accessToken } = useContext(AuthContext);
+  console.log('CREATE POST: ', title, image, accessToken, text);
+  console.log('CREATE POST: AUTH TOKEN: ', accessToken);
+
   return axios({
     method: 'POST',
-    url: `${baseUrl}/posts/create/`,
+    url: `${baseUrl}/posts-create/`,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'multipart/form-data',
+    },
+    data: {
+      image,
+      title,
+      text,
+    },
+  });
+};
+
+export const editPost = ({ title, image, text, auth }) => {
+  return axios({
+    method: 'PUT',
+    url: `${baseUrl}/posts/edit/`,
     headers: {
       Authorization: `Bearer ${auth.accessToken}`,
       'Content-Type': 'multipart/form-data'
     },
     data: {
-      image, 
+      image,
       title,
-    } 
+      text,
+    }
   })
 }
