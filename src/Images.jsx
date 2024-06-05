@@ -11,7 +11,6 @@ const Images = () => {
             getImages({ auth })
             .then(response => {
                 console.log('GET images:', response)
-                console.log('acessToken is ', auth.accessToken)
                 setImages(response.data) // Assuming response.data contains the array of images
             })
             .catch(error => console.log('ERROR', error))

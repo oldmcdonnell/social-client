@@ -77,7 +77,7 @@ export const createImage = async ({ title, image }) => {
 };
 
 
-// Function to create a post
+
 export const createPost = async ({ title, image, text }) => {
   const { accessToken } = useContext(AuthContext);
   console.log('CREATE POST: ', title, image, accessToken, text);
