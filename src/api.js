@@ -9,6 +9,7 @@ export const getToken = ({ auth, username, password }) => {
   }).then(response => {
     console.log('RESPONSE: ', response)
     auth.setAccessToken(response.data.access)
+    console.log('Test in getToken : ', response.data.access)
   })
   .catch(error => {
     console.log('ERROR: ', error)

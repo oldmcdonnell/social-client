@@ -28,7 +28,7 @@ const Protected = ({ component }) => {
       {component}
     </>
   ) : (
-    <Navigate to="/login" replace={true} />
+    <Navigate to="/login" replace={true}/>
   );
 };
 
@@ -63,6 +63,23 @@ const router = createBrowserRouter([
   }
 ])
 
+// const tempToken = JSON.parse(localStorage.getItem('token'));
+// const [accessToken, setAccessToken] = useState(tempToken || "");
+
+// useEffect(() => {
+//   if (accessToken) {
+//     localStorage.setItem("token", JSON.stringify(accessToken));
+//   } else {
+//     localStorage.removeItem("token");
+//   }
+// }, [accessToken]);
+
+// const auth = {
+//   accessToken,
+//   setAccessToken 
+// };
+
+
 // const AuthContextProvider = ({ children }) => {
 //   const [accessToken, setAccessToken] = useState(undefined)
   
@@ -83,9 +100,13 @@ const AuthContextProvider = ({ children }) => {
   
   const [accessToken, setAccessToken] = useState(tempToken ? tempToken : "")
 
-  useEffect(() => {
-    localStorage.setItem("token", JSON.stringify(accessToken))
-  }, [accessToken])
+useEffect(() => {
+  if (accessToken) {
+    localStorage.setItem("token", JSON.stringify(accessToken));
+  } else {
+    localStorage.getItem("token");
+  }
+}, [accessToken]);
 
   const auth = {
     accessToken,
