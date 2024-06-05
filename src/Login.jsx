@@ -5,7 +5,7 @@ import CreateNewUser from "./CreateNewUser";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const { auth } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -16,13 +16,12 @@ function Login() {
     }
   }, [navigate, auth.accessToken]);
 
-  const submit = async () => {
-    try {
-      console.log('login accessToken ', admin.accessToken)
-      const token = await getToken({ username, password });
-      admin.setAccessToken(token); // Update context with new token
-    } catch (error) {
-      console.error('Login error: ', error);
+  const submit = (e) => {
+    e.preventDefault();
+    if (auth && auth.setAccessToken) {
+      getToken({ auth, username, password });
+    } else {
+      console.error("Auth context is not properly initialized");
     }
   };
 
