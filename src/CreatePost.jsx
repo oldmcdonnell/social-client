@@ -13,7 +13,7 @@ const CreatePost = () => {
         if (auth.accessToken) {
           getImages({ auth })
             .then(response => {
-                console.log('checking accesstoken  ', accessToken)
+                console.log('checking accesstoken  ', auth.accessToken)
                 console.log('GET IMAGES: RESPONSE: ', response)
                 setImages(response.data)
             })
