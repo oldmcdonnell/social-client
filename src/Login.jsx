@@ -11,16 +11,16 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (auth.accessToken) {
+    if (accessToken) {
       navigate('/');
     }
-  }, [navigate, auth.accessToken]);
+  }, [navigate, accessToken]);
 
   const submit = async () => {
     try {
       console.log('login accessToken ', accessToken)
       const token = await getToken({ username, password });
-      auth.setAccessToken(token); // Update context with new token
+      setAccessToken(token); // Update context with new token
     } catch (error) {
       console.error('Login error: ', error);
     }

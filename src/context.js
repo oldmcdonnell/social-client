@@ -1,4 +1,4 @@
 // context.js
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext } from 'react';
 
 export const AuthContext = createContext();
