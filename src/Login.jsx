@@ -5,22 +5,22 @@ import CreateNewUser from "./CreateNewUser";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const { accessToken, setAccessToken } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (accessToken) {
+    if (auth.accessToken) {
       navigate('/');
     }
-  }, [navigate, accessToken]);
+  }, [navigate, auth.accessToken]);
 
   const submit = async () => {
     try {
-      console.log('login accessToken ', accessToken)
+      console.log('login accessToken ', admin.accessToken)
       const token = await getToken({ username, password });
-      setAccessToken(token); // Update context with new token
+      admin.setAccessToken(token); // Update context with new token
     } catch (error) {
       console.error('Login error: ', error);
     }
