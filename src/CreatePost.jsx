@@ -6,7 +6,7 @@ const CreatePost = () => {
     const { auth } = useContext(AuthContext);
     const [text, setText] = useState("");
     const [title, setTitle] = useState("");
-    const [image, setImage] = useState(""); // Handle image as an ID
+    const [image, setImage] = useState(undefined); // Handle image as an ID
     const [images, setImages] = useState([]); // State to hold user-uploaded images
 
     useEffect(() => {

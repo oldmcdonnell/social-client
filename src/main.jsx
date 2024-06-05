@@ -63,41 +63,41 @@ const router = createBrowserRouter([
   }
 ])
 
-const AuthContextProvider = ({ children }) => {
-  const [accessToken, setAccessToken] = useState(undefined)
-  
-  const auth = {
-    accessToken,
-    setAccessToken,
-  }
-
-  return(
-    <AuthContext.Provider value={{ auth: auth }} >
-      {children}
-    </AuthContext.Provider>
-  )
-}
-
 // const AuthContextProvider = ({ children }) => {
-//   let tempToken = JSON.parse(localStorage.getItem('token'))
+//   const [accessToken, setAccessToken] = useState(undefined)
   
-//   const [accessToken, setAccessToken] = useState(tempToken ? tempToken : [])
-
-//   useEffect(() => {
-//     localStorage.setItem("token", JSON.stringify(accessToken))
-//   }, [accessToken])
-
 //   const auth = {
 //     accessToken,
-//     setAccessToken
+//     setAccessToken,
 //   }
 
-//   return (
-//     <AuthContext.Provider value ={{ auth }}>
+//   return(
+//     <AuthContext.Provider value={{ auth: auth }} >
 //       {children}
 //     </AuthContext.Provider>
 //   )
 // }
+
+const AuthContextProvider = ({ children }) => {
+  let tempToken = JSON.parse(localStorage.getItem('token'))
+  
+  const [accessToken, setAccessToken] = useState(tempToken ? tempToken : "")
+
+  useEffect(() => {
+    localStorage.setItem("token", JSON.stringify(accessToken))
+  }, [accessToken])
+
+  const auth = {
+    accessToken,
+    setAccessToken
+  }
+
+  return (
+    <AuthContext.Provider value ={{ auth }}>
+      {children}
+    </AuthContext.Provider>
+  )
+}
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
