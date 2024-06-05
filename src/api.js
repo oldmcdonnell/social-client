@@ -13,6 +13,8 @@ const checkAuth = ({ auth }) =>{
   }
 
 }
+
+
 export const getToken = ({ auth, username, password }) => {
   axios.post(`${baseUrl}/token/`, {
     username: username,
@@ -20,7 +22,6 @@ export const getToken = ({ auth, username, password }) => {
   }).then(response => {
     console.log('RESPONSE: ', response)
     auth.setAccessToken(response.data.access)
-    console.log('Test in getToken : ', response.data.access)
   })
   .catch(error => {
     console.log('ERROR: ', error)
@@ -63,7 +64,6 @@ export const createUser = ({ username, password, firstName, lastName }) => {
 }
 
 export const getImages = ({ auth }) => {
-  checkAuth({ auth })
   return axios({
     method: 'GET',
     url: `${baseUrl}/get-images/`,
@@ -91,7 +91,7 @@ export const createImage = ({ title, image, auth }) => {
 
 
 export const createPost = ({ title, image, auth }) => {
-  checkAuth({ auth })
+  // checkAuth({ auth })
   console.log("Checking auth and other stuff", auth)
   return axios({
     method: 'POST',
