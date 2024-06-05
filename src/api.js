@@ -4,14 +4,14 @@ const baseUrl = "http://127.0.0.1:8000"
 
 
 const checkAuth = ({ auth }) =>{
-  if (auth.accessToken = undefined){
+  if (auth.accessToken == undefined){
     let tempToken = JSON.parse(localStorage.getItem('token'))
     auth.setAccessToken(tempToken)
+    console.log('TempToken function ', tempToken)
   }
   else {
-    console.log('auth exists')
+    console.log('auth exists', auth.accessToken)
   }
-
 }
 
 
@@ -91,7 +91,7 @@ export const createImage = ({ title, image, auth }) => {
 
 
 export const createPost = ({ title, image, auth }) => {
-  // checkAuth({ auth })
+  checkAuth({ auth })
   console.log("Checking auth and other stuff", auth)
   return axios({
     method: 'POST',
