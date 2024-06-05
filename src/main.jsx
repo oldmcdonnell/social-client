@@ -18,6 +18,8 @@ import Header from './Header'
 import Footer from './Footer'
 import Login from './Login'
 import { AuthContext } from './context'
+import Gallery from './Gallery'
+import Posts from './Posts'
 
 
 const Protected = ({ component }) => {
@@ -58,6 +60,14 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />
+      },
+      {
+        path: '/gallery',
+        element: <Gallery />
+      },
+      {
+        path: '/posts',
+        element: <Posts />
       },
     ]
   }
