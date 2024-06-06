@@ -63,11 +63,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/gallery',
-        element: <Gallery />
+        element: <Protected component={<Gallery />} />
       },
       {
         path: '/posts',
-        element: <Posts />
+        element: <Protected component={<Posts />} />
       },
     ]
   }

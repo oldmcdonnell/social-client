@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 import { AuthContext } from "./context"
 import { listPost } from "./api"
 
@@ -10,7 +10,7 @@ const AllPosts = () => {
         if(auth.accessToken) {
             listPost({ auth })
             .then(response => {
-                console.log('GET posts:', response)
+                console.log('GET Posts:', response)
                 setImages(response.data) 
             })
             .catch(error => console.log('ERROR', error))
@@ -19,7 +19,7 @@ const AllPosts = () => {
 
     return(
         <div style={{ marginTop: 20 }}>
-        {images.length > 0 ? (
+        {posts.length > 0 ? (
             <ul>
                 {posts.map(post => (
                     <li key={post.id}>
@@ -36,7 +36,7 @@ const AllPosts = () => {
                 ))}
             </ul>
         ) : (
-            <p>No images available</p>
+            <p>No posts available</p>
         )}
     </div>
 

@@ -15,7 +15,7 @@ function MyNavbar() {
           <Nav className="mx-auto Navbar col-m-6">
             <Link className="text-black-50 px-3 navbar" to="/">Home</Link>
             <Link className="text-black-50 px-3 navbar" to="/Gallery">Gallery</Link>
-            <Link className="text-black-50 px-3 navbar" to="/AllPosts">Posts</Link>
+            <Link className="text-black-50 px-3 navbar" to="/Posts">Posts</Link>
           </Nav>
         </Navbar.Collapse>
     </Container>

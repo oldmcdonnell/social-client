@@ -3,7 +3,7 @@ function Posts(){
     
     return (
             <div>
-                
+                <AllPosts />
             </div>
     )
 }
