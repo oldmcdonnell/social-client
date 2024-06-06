@@ -153,6 +153,16 @@ export const listPost = ({ auth }) => {
   })
 }
 
+export const listOwnPost = ({ auth }) => {
+  console.log('GET IMAGES: AUTH: ', auth.accessToken)
+  return axios({
+    method: 'GET',
+    url: `${baseUrl}/get-own-posts/`,
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`
+    }
+  })
+}
 
 export const deletePost = ({ auth }) => {
   console.log('GET IMAGES: AUTH: ', auth.accessToken)
@@ -170,10 +180,10 @@ export const deletePost = ({ auth }) => {
   })
 }
 
-export const updatePost = ({ auth, title, text, image }) => {
+export const updatePost = ({ auth, postId, title, text, image }) => {
   return axios({
     method: 'PUT',
-    url: `${baseUrl}/posts/update/${postId}/`,
+    url: `${baseUrl}/posts/update/${postId}/`, // Ensure postId is passed correctly here
     headers: {
       Authorization: `Bearer ${auth.accessToken}`,
       'Content-Type': 'multipart/form-data'
@@ -185,9 +195,9 @@ export const updatePost = ({ auth, title, text, image }) => {
     } 
   })
   .then(response => {
-    console.log('Post Edit: ', response)
+    console.log('Post Edit: ', response);
   })
   .catch(error => {
-    console.log('ERROR with Edit: ', error)
-  })
+    console.log('ERROR with Edit: ', error);
+  });
 }

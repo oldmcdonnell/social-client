@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext, UserContext } from "./context";
-import { listPost, deletePost } from "./api";
+import { deletePost,listOwnPost } from "./api";
 import EditPost from "./EditPost";
 
 const MyPosts = () => {
@@ -11,10 +11,11 @@ const MyPosts = () => {
 
     useEffect(() => {
         if (auth.accessToken) {
-            listPost({ auth })
+            listOwnPost({ auth })
                 .then(response => {
                     console.log('GET Posts:', response);
                     setPosts(response.data);
+                    setUser(response.data.user)
                 })
                 .catch(error => console.log('ERROR', error));
         }
@@ -37,7 +38,7 @@ const MyPosts = () => {
     const handleSaveEdit = () => {
         setEditingPost(null);
         // Reload posts after saving edit
-        listPost({ auth })
+        listOwnPost({ auth })
             .then(response => setPosts(response.data))
             .catch(error => console.log('Error reloading posts after edit:', error));
     };
@@ -65,12 +66,8 @@ const MyPosts = () => {
                             />
                             <p>{post.text}</p>
                             <p>Created: {post.created_at}</p>
-                            {auth.user && post.user.username === auth.user.username && (
-                                <>
-                                    <button onClick={() => handleEdit(post)}>Edit</button>
-                                    <button onClick={() => handleDelete(post.id)}>Delete</button>
-                                </>
-                            )}
+                            <button onClick={() => handleEdit(post)}>Edit</button>
+                            <button onClick={() => handleDelete(post.id)}>Delete</button>
                         </li>
                     ))}
                 </ul>

@@ -1,4 +1,5 @@
-import { useState } from "react"
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "./context";
 import { updatePost, getImages } from "./api";
 
 const EditPost = ({ post, onCancel, onSave }) => {
@@ -11,44 +12,45 @@ const EditPost = ({ post, onCancel, onSave }) => {
     useEffect(() => {
         if (auth.accessToken) {
             getImages({ auth })
-            .then(response => {
-                console.log('GET IMAGES: RESPONSE: ', response)
-                setImages(response.data)
-            })
-            .catch(error => console.log('ERROR: ', error))
+                .then(response => {
+                    console.log('GET IMAGES: RESPONSE: ', response);
+                    setImages(response.data);
+                })
+                .catch(error => console.log('ERROR: ', error));
         }
-      }, [auth.accessToken])
+    }, [auth.accessToken]);
 
-      const handleImageChange = (e) => {
-        setImage(e.target.value)
-      }
+    const handleImageChange = (e) => {
+        setImage(e.target.value);
+    };
 
-      const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         e.preventDefault();
-        if(auth.accessToken){
+        if (auth.accessToken) {
             updatePost({ auth, 
                 postId: post.id, 
                 title, 
                 text, 
-                image 
-            })
-            .then(response => {
-                console.log('POST UPDATED:', response);
-            })
-            .catch(error => console.log('ERROR:', error));
+                image })
+                .then(response => {
+                    console.log('POST UPDATED:', response);
+                    onSave();
+                })
+                .catch(error => console.log('ERROR:', error));
         }
-      }
+    };
 
-    return(
+    return (
         <div>
             <h1>Edit Post</h1>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Title</label>
                     <input 
-                    type="text"
-                    value={title}
-                    onChange={(e)=> setTitle(e.target.value)}/>
+                        type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
                 </div>
                 <div>
                     <label>Text:</label>
@@ -56,23 +58,17 @@ const EditPost = ({ post, onCancel, onSave }) => {
                 </div>
                 <div>
                     <label>Select Image:</label>
-                    <select value={image} 
-                    onChange={handleImageChange}>
+                    <select value={image} onChange={handleImageChange}>
                         {images.map(img => (
-                            <option 
-                            key={img.id} 
-                            value={img.id}>
-                                {img.title}
-                                </option>
+                            <option key={img.id} value={img.id}>{img.title}</option>
                         ))}
                     </select>
                 </div>
                 <button type="submit">Update Post</button>
                 <button type="button" onClick={onCancel}>Cancel</button>
             </form>
-            
         </div>
-    )
-}
+    );
+};
 
-export default EditPost
+export default EditPost;
