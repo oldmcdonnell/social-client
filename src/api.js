@@ -152,3 +152,42 @@ export const listPost = ({ auth }) => {
     }
   })
 }
+
+
+export const deletePost = ({ auth }) => {
+  console.log('GET IMAGES: AUTH: ', auth.accessToken)
+  return axios({
+    method: 'DELETE',
+    url: `${baseUrl}/posts/delete/`,
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`
+    }
+  }).then(response => {
+    console.log('Deleted Post: ', response)
+  })
+  .catch(error => {
+    console.log('ERROR deleting post: ', error)
+  })
+}
+
+export const updatePost = ({ auth, title, text, image }) => {
+  return axios({
+    method: 'PUT',
+    url: `${baseUrl}/posts/update/${postId}/`,
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`,
+      'Content-Type': 'multipart/form-data'
+    },
+    data: {
+      image, 
+      title,
+      text,
+    } 
+  })
+  .then(response => {
+    console.log('Post Edit: ', response)
+  })
+  .catch(error => {
+    console.log('ERROR with Edit: ', error)
+  })
+}

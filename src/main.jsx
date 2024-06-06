@@ -17,9 +17,10 @@ import { Navigate } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import Login from './Login'
-import { AuthContext } from './context'
+import { AuthContext, UserContext } from './context'
 import Gallery from './Gallery'
 import Posts from './Posts'
+import MyPosts from './MyPosts'
 
 
 const Protected = ({ component }) => {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: '/posts',
         element: <Protected component={<Posts />} />
+      },
+      {
+        path: '/myposts',
+        element: <Protected component={<MyPosts />} />
       },
     ]
   }
@@ -131,8 +136,19 @@ useEffect(() => {
 }
 
 
+const UserContextProvider = ({ children }) => {
+  const [user, setUser] = useState("")
+  return(
+  <UserContext.Provider value={{user, setUser}} >
+    {children}
+  </UserContext.Provider>
+  )
+}
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <AuthContextProvider>
-    <RouterProvider router={router} />
+    <UserContextProvider>
+      <RouterProvider router={router} />
+    </UserContextProvider>
   </AuthContextProvider>
 )

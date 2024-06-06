@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "./context";
-import { listPost } from "./api";
+import { listPost, deletePost } from "./api";
 
 const AllPosts = () => {
     const { auth } = useContext(AuthContext);
     const [posts, setPosts] = useState([]);
+    const [editingPost, setEditingPost] = useState(null)
 
     useEffect(() => {
         if (auth.accessToken) {
@@ -16,6 +17,17 @@ const AllPosts = () => {
                 .catch(error => console.log('ERROR', error));
         }
     }, [auth.accessToken]);
+
+    const handleEdit = (post) => {
+        setEditingPost(post);
+    }
+
+    const handleDelete = (postId) => {
+        deletePost({ auth, postId })
+        .then(() =>{
+            setPosts(post.filter(post => post.It !== postId))
+        })
+    } 
 
     return (
         <div style={{ marginTop: 20 }}>
