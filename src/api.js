@@ -123,20 +123,32 @@ export const createPost = ({ title, image, auth, text }) => {
   })
 }
 
-export const listPost = ({title, text, image, user, created_at, auth}) => {
+// export const listPost = ({title, text, image, user, created_at, auth}) => {
+//   return axios({
+//     method: 'GET',
+//     url: `${baseUrl}/posts/create/`,
+//     headers: {
+//       Authorization: `Bearer ${auth.accessToken}`,
+//       'Content-Type': 'multipart/form-data'
+//     },
+//     data: {
+//       image, 
+//       title,
+//       text,
+//       user,
+//       created_at
+//     } 
+//   })
+// }
+
+
+export const listPost = ({ auth }) => {
+  console.log('GET IMAGES: AUTH: ', auth.accessToken)
   return axios({
     method: 'GET',
-    url: `${baseUrl}/posts/create/`,
+    url: `${baseUrl}/get-posts/`,
     headers: {
-      Authorization: `Bearer ${auth.accessToken}`,
-      'Content-Type': 'multipart/form-data'
-    },
-    data: {
-      image, 
-      title,
-      text,
-      user,
-      created_at
-    } 
+      Authorization: `Bearer ${auth.accessToken}`
+    }
   })
 }
