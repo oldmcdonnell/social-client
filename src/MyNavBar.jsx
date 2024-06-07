@@ -13,10 +13,10 @@ function MyNavbar() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mx-auto Navbar col-m-6">
-            <Link className="text-black-50 px-3 navbar" to="/">Home</Link>
-            <Link className="text-black-50 px-3 navbar" to="/Gallery">Gallery</Link>
-            <Link className="text-black-50 px-3 navbar" to="/Posts">All Posts</Link>
-            <Link className="text-black-50 px-3 navbar" to="/MyPosts">My Posts</Link>
+            <Link className="text-black-50 px-3 navBar" to="/">Home</Link>
+            <Link className="text-black-50 px-3 navBar" to="/Gallery">Gallery</Link>
+            <Link className="text-black-50 px-3 navBar" to="/Posts">All Posts</Link>
+            <Link className="text-black-50 px-3 navBar" to="/MyPosts">My Posts</Link>
           </Nav>
         </Navbar.Collapse>
     </Container>

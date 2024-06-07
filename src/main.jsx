@@ -17,7 +17,7 @@ import { Navigate } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import Login from './Login'
-import { AuthContext, UserContext } from './context'
+import { AuthContext, UserContext, ImageContext } from './context'
 import Gallery from './Gallery'
 import Posts from './Posts'
 import MyPosts from './MyPosts'
@@ -145,10 +145,22 @@ const UserContextProvider = ({ children }) => {
   )
 }
 
+
+const ImageContextProvider = ({ children }) => {
+  const [images, setImages] = useState([])
+  return(
+  <ImageContext.Provider value={{images, setImages}} >
+    {children}
+  </ImageContext.Provider>
+  )
+}
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <AuthContextProvider>
     <UserContextProvider>
-      <RouterProvider router={router} />
+      <ImageContextProvider>
+        <RouterProvider router={router} />
+      </ImageContextProvider>
     </UserContextProvider>
   </AuthContextProvider>
 )
