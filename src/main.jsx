@@ -48,7 +48,7 @@ function Layout() {
 }
 
 
-const router = createBrowserRouter([
+const router = createBrowserRouter([ 
   {
     element: <Layout />,
     errorElement: <ErrorPage />,
@@ -78,37 +78,7 @@ const router = createBrowserRouter([
   }
 ])
 
-// const tempToken = JSON.parse(localStorage.getItem('token'));
-// const [accessToken, setAccessToken] = useState(tempToken || "");
 
-// useEffect(() => {
-//   if (accessToken) {
-//     localStorage.setItem("token", JSON.stringify(accessToken));
-//   } else {
-//     localStorage.removeItem("token");
-//   }
-// }, [accessToken]);
-
-// const auth = {
-//   accessToken,
-//   setAccessToken 
-// };
-
-
-// const AuthContextProvider = ({ children }) => {
-//   const [accessToken, setAccessToken] = useState(undefined)
-  
-//   const auth = {
-//     accessToken,
-//     setAccessToken,
-//   }
-
-//   return(
-//     <AuthContext.Provider value={{ auth: auth }} >
-//       {children}
-//     </AuthContext.Provider>
-//   )
-// }
 
 const AuthContextProvider = ({ children }) => {
   let tempToken = JSON.parse(localStorage.getItem('token'))

@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { AuthContext, UserContext } from "./context";
 import { deletePost,listOwnPost } from "./api";
 import EditPost from "./EditPost";
+import CreatePost from "./CreatePost";
 
 const MyPosts = () => {
     const { auth } = useContext(AuthContext);
@@ -45,6 +46,8 @@ const MyPosts = () => {
 
     return (
         <div style={{ marginTop: 20 }}>
+            <CreatePost />
+
             {editingPost && (
                 <EditPost
                     post={editingPost}
