@@ -21,7 +21,7 @@ const CreateNewUser = () => {
           <input
             type="text"
             id="new-username"
-            className="form-control"
+            className="form-control input-width"
             onChange={(e) => setUsername(e.target.value)}
             value={username}
           />
@@ -32,7 +32,7 @@ const CreateNewUser = () => {
           <input
             type="password"
             id="new-password"
-            className="form-control"
+            className="form-control input-width"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
@@ -43,7 +43,7 @@ const CreateNewUser = () => {
           <input
             type="text"
             id="first-name"
-            className="form-control"
+            className="form-control input-width"
             onChange={(e) => setFirstName(e.target.value)}
             value={firstName}
           />
@@ -54,7 +54,7 @@ const CreateNewUser = () => {
           <input
             type="text"
             id="last-name"
-            className="form-control"
+            className="form-control input-width"
             onChange={(e) => setLastName(e.target.value)}
             value={lastName}
           />

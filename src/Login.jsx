@@ -16,20 +16,21 @@ function Login() {
     }
   }, [navigate, auth.accessToken]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     getToken({ auth, username, password });
   };
 
   return (
     <div className="p-5">
       <h1>Login</h1>
-      <form onSubmit={e => { e.preventDefault(); handleSubmit(); }}>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
-            className="form-control"
+            className="form-control input-width"
             onChange={(e) => setUsername(e.target.value)}
             value={username}
           />
@@ -40,7 +41,7 @@ function Login() {
           <input
             type="password"
             id="password"
-            className="form-control"
+            className="form-control input-width"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
