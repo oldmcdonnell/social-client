@@ -1,57 +1,61 @@
-import React, { useContext, useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import { AuthContext } from "./context"
-import { getToken } from "./api"
-import CreateNewUser from "./CreateNewUser"
-import { useNavigate } from "react-router-dom"
-
+import React, { useContext, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "./context";
+import { getToken } from "./api";
+import CreateNewUser from "./CreateNewUser";
 
 function Login() {
-  const { auth } = useContext(AuthContext)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const navigate = useNavigate()
+  const { auth } = useContext(AuthContext);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  useEffect(()=> {
-    if (auth.accessToken){
-      navigate('/')
+  useEffect(() => {
+    if (auth.accessToken) {
+      navigate('/');
     }
-  },[navigate, auth.accessToken])
+  }, [navigate, auth.accessToken]);
 
-  const submit = () => {
-    getToken({ auth, username, password })
-  }
+  const handleSubmit = () => {
+    getToken({ auth, username, password });
+  };
 
   return (
     <div className="p-5">
-
       <h1>Login</h1>
-      <div>
-        <div>Username:</div>
-        <input
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-        />
-      </div>
+      <form onSubmit={e => { e.preventDefault(); handleSubmit(); }}>
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            className="form-control"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+          />
+        </div>
 
-      <div>
-        <div>Password:</div>
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-      </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            className="form-control"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+        </div>
 
-      <div style={{ marginTop: 20 }}>
-        <button onClick={() => submit()}>Submit</button>
-      </div>
+        <div className="form-group mt-3">
+          <button type="submit" className="btn btn-primary">Submit</button>
+        </div>
+      </form>
 
       <hr />
-      
-      <CreateNewUser />
 
+      <CreateNewUser />
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

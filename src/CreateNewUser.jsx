@@ -1,58 +1,71 @@
-import { useState } from "react"
-
-import { createUser } from './api'
-
+import React, { useState } from "react";
+import { createUser } from './api';
 
 const CreateNewUser = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
-  const submit = () => {
-    createUser({ username, password, firstName, lastName })
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createUser({ username, password, firstName, lastName });
+  };
 
   return (
     <div>
       <h1>Create New User</h1>
-      <div>
-        <div>Username:</div>
-        <input
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-        />
-      </div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="new-username">Username:</label>
+          <input
+            type="text"
+            id="new-username"
+            className="form-control"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+          />
+        </div>
 
-      <div>
-        <div>Password:</div>
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-      </div>
+        <div className="form-group">
+          <label htmlFor="new-password">Password:</label>
+          <input
+            type="password"
+            id="new-password"
+            className="form-control"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+        </div>
 
-      <div>
-        <div>First Name:</div>
-        <input
-          onChange={(e) => setFirstName(e.target.value)}
-          value={firstName}
-        />
-      </div>
+        <div className="form-group">
+          <label htmlFor="first-name">First Name:</label>
+          <input
+            type="text"
+            id="first-name"
+            className="form-control"
+            onChange={(e) => setFirstName(e.target.value)}
+            value={firstName}
+          />
+        </div>
 
-      <div>
-        <div>Last Name:</div>
-        <input
-          onChange={(e) => setLastName(e.target.value)}
-          value={lastName}
-        />
-      </div>
+        <div className="form-group">
+          <label htmlFor="last-name">Last Name:</label>
+          <input
+            type="text"
+            id="last-name"
+            className="form-control"
+            onChange={(e) => setLastName(e.target.value)}
+            value={lastName}
+          />
+        </div>
 
-      <div style={{ marginTop: 20 }}>
-        <button onClick={() => submit()}>Submit</button>
-      </div>
+        <div className="form-group mt-3">
+          <button type="submit" className="btn btn-primary">Submit</button>
+        </div>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default CreateNewUser
+export default CreateNewUser;
