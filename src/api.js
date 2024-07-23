@@ -3,17 +3,6 @@ import axios from 'axios'
 const baseUrl = "http://127.0.0.1:8000"
 
 
-// const checkAuth = ({ auth }) =>{
-//   if (auth.accessToken == undefined){
-//     let tempToken = JSON.parse(localStorage.getItem('token'))
-//     auth.setAccessToken(tempToken)
-//     console.log('TempToken function ', tempToken)
-
-//   }
-//   else {
-//     console.log('auth exists', auth.accessToken)
-//   }
-// }
 
 
 export const getToken = ({ auth, username, password }) => {

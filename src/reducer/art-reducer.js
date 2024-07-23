@@ -10,7 +10,7 @@ const saveStateToLocalStorage = (state) => {
   localStorage.setItem('STATE', JSON.stringify(state));
 };
 
-export const mainReducer = (state = initialMainState, action) => {
+export const artReducer = (state = initialMainState, action) => {
   let newState;
 
   switch (action.type) {

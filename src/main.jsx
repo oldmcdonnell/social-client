@@ -21,6 +21,8 @@ import { AuthContext, UserContext, ImageContext } from './context'
 import Gallery from './Gallery'
 import Posts from './Posts'
 import MyPosts from './MyPosts'
+import { artReducer, initialMainState } from './reducer/art-reducer'
+
 
 
 const Protected = ({ component }) => {
