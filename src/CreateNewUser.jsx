@@ -6,15 +6,31 @@ const CreateNewUser = () => {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    createUser({ username, password, firstName, lastName });
+    try {
+      const response = await createUser({ username, password, firstName, lastName });
+      if (response.success) {
+        setUsername('');
+        setPassword('');
+        setFirstName('');
+        setLastName('');
+        setMessage('User created successfully!');
+      } else {
+        setMessage('Error creating user.');
+      }
+    } catch (error) {
+      console.log('ERROR: ', error);
+      setMessage('Error creating user.');
+    }
   };
 
   return (
     <div>
       <h1>Create New User</h1>
+      {message && <p>{message}</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="new-username">Username:</label>

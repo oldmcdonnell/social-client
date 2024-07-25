@@ -35,7 +35,7 @@ export const fetchUser = ({ auth }) => {
 }
 
 export const createUser = ({ username, password, firstName, lastName }) => {
-  axios({
+  return axios({
     method: 'post',
     url: `${baseUrl}/create-user/`, 
     data: {
@@ -45,12 +45,14 @@ export const createUser = ({ username, password, firstName, lastName }) => {
       last_name: lastName
     }
   }).then(response => {
-    console.log('CREATE USER: ', response)
+    console.log('CREATE USER: ', response);
+    return { success: true, data: response.data };
   })
   .catch(error => {
-    console.log('ERROR: ', error)
-  })
-}
+    console.log('ERROR: ', error);
+    return { success: false, error };
+  });
+};
 
 export const getImages = ({ auth }) => {
   console.log('GET IMAGES: AUTH: ', auth.accessToken)
