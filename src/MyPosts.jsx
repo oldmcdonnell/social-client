@@ -3,6 +3,7 @@ import { AuthContext, UserContext } from "./context";
 import { deletePost,listOwnPost } from "./api";
 import EditPost from "./EditPost";
 import CreatePost from "./CreatePost";
+import { baseUrl } from "./api";
 
 const MyPosts = () => {
     const { auth } = useContext(AuthContext);
@@ -63,7 +64,7 @@ const MyPosts = () => {
                             <h4>{post.title}</h4>
                             <h3>User post: {post.user.username}</h3>
                             <img
-                                src={`http://127.0.0.1:8000${post.image.image}`}
+                                src={`${baseUrl}${post.image.image}`}
                                 style={{ width: '30%' }}
                                 alt={post.title}
                             />

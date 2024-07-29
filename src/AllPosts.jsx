@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "./context";
 import { listPost, deletePost } from "./api";
+import { baseUrl } from "./api";
 
 const AllPosts = () => {
   const { auth } = useContext(AuthContext);
@@ -39,7 +40,7 @@ const AllPosts = () => {
               <h4>{post.title}</h4>
               <h5>User post: {post.user.username}</h5>
               <img
-                src={`http://127.0.0.1:8000${post.image.image}`}
+                src={`${baseUrl}${post.image.image}`}
                 style={{ width: '30%' }}
                 alt={post.title}
                 className="img-fluid"

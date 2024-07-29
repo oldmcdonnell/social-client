@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { AuthContext, ImageContext } from "./context"
 import { getImages } from "./api"
+import { baseUrl } from "./api"
 
 const Images = () => {
     // const [images, setImages] = useState([])
@@ -26,7 +27,7 @@ const Images = () => {
                         <li key={image.id}>
                             <h4>{image.title}</h4>
                             <img 
-                                src={`http://127.0.0.1:8000${image.image}`} 
+                                src={`${baseUrl}${image.image}`} 
                                 style={{ width: '30%' }} 
                                 alt={image.title} 
                             />
